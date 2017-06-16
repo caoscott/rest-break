@@ -2,6 +2,7 @@
 import time
 import os
 import logging
+import datetime
 
 # All times are in seconds
 
@@ -10,14 +11,16 @@ def log_total_time():
 
 
 def trigger_break(break_type, break_duration):
-    while break_duration >= 10:
-        os.system('notify-send -t %d -u normal \"%s break: %d left\"'
-                %(10000, break_type, break_duration))
-        time.sleep(10)
-        break_duration -= 10
-    if 0 < break_duration < 10:
-        os.system('notify-send -t %d -u normal \"%s break: %d left\"'
-                %(break_duration, break_type, break_duration))
+    while break_duration >= 30:
+        os.system('notify-send -t %d -u normal \"%s break: %s left\"'
+                %(30000, break_type, 
+                str(datetime.timedelta(seconds=break_duration))))
+        time.sleep(30)
+        break_duration -= 30
+    if 0 < break_duration < 30:
+        os.system('notify-send -t %d -u normal \"%s break: %s left\"'
+                %(break_duration, break_type, 
+                str(datetime.timedelta(seconds=break_duration))))
         time.sleep(break_duration)
         # break_duration = 0
     os.system('notify-send -t %d -u normal \"%s break is over\"'
