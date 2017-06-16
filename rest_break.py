@@ -15,7 +15,7 @@ def trigger_break(break_type, break_duration):
                 %(10000, break_type, break_duration))
         time.sleep(10)
         break_duration -= 10
-    if break_duration < 10:
+    if 0 < break_duration < 10:
         os.system('notify-send -t %d -u normal \"%s break: %d left\"'
                 %(break_duration, break_type, break_duration))
         time.sleep(break_duration)
