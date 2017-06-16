@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import time
 import os
+import logging
 
 # All times are in seconds
 
@@ -24,8 +25,7 @@ def trigger_break(break_type, break_duration):
 
 
 if __name__ == '__main__':
-    print('Hello')
-
+    
     TIME_BETWEEN_QUICK_BREAKS = 300
     DURATION_OF_QUICK_BREAK = 30
     TIME_BETWEEN_REST_BREAKS = 1800
