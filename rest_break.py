@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import sys
 import time
 import os
 import logging
@@ -28,7 +29,7 @@ def trigger_break(break_type, break_duration):
 
 
 if __name__ == '__main__':
-    
+   
     TIME_BETWEEN_QUICK_BREAKS = 300
     DURATION_OF_QUICK_BREAK = 30
     TIME_BETWEEN_REST_BREAKS = 1800
@@ -37,11 +38,17 @@ if __name__ == '__main__':
     # Keeps track of how many seconds have passed since the last rest break 
     # (or how long since the script started running if there was no rest break). 
     # Does not account for the time for breaks.
-    time_since_rest_break = 0
+    if len(sys.argv) > 1:
+        time_since_rest_break = int(sys.argv[1])
+    else:
+        time_since_rest_break = 0
 
     # Keeps track of how many seconds have passed since the script started running
-    # Does not account for the time for breaks. 
-    total_time = 0
+    # Does not account for the time for breaks.
+    if len(sys.argv) > 1:
+        total_time = int(sys.argv[1])
+    else:
+        total_time = 0
 
     while True:
         time_til_rest_break = TIME_BETWEEN_REST_BREAKS - time_since_rest_break
