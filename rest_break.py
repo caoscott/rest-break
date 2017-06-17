@@ -7,10 +7,6 @@ import datetime
 
 # All times are in seconds
 
-def log_total_time():
-    # print(total_time)
-
-
 def trigger_break(break_type, break_duration, icon_path):
     while break_duration >= 30:
         os.system('notify-send -t %d -u normal -i %s \"%s break: %s left\"'
@@ -29,6 +25,8 @@ def trigger_break(break_type, break_duration, icon_path):
 
 
 if __name__ == '__main__':
+
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
    
     TIME_BETWEEN_QUICK_BREAKS = 300
     DURATION_OF_QUICK_BREAK = 30
@@ -59,18 +57,10 @@ if __name__ == '__main__':
             time.sleep(time_til_rest_break)
             total_time += time_til_rest_break
             time_since_rest_break = 0
-            # print("REST BREAK")
-            log_total_time()
             trigger_break('Rest', DURATION_OF_REST_BREAK, PATH_TO_ICON)
-            # print("REST BREAK IS OVER")
-            log_total_time()
         else:
             # Sleep until quick break
             time.sleep(TIME_BETWEEN_QUICK_BREAKS)
             total_time += TIME_BETWEEN_QUICK_BREAKS
             time_since_rest_break += TIME_BETWEEN_QUICK_BREAKS
-            # print("QUICK BREAK")
-            log_total_time()
             trigger_break('Quick', DURATION_OF_QUICK_BREAK, PATH_TO_ICON)
-            # print("QUICK BREAK IS OVER")
-            log_total_time()
