@@ -24,6 +24,18 @@ def trigger_break(break_type, break_duration, icon_path):
                 %(2000, break_type))
 
 
+def headphones_on():
+    status = os.system('amixer -c 0 contents | grep -A 2 \"Front Headphone\" | grep values=on')
+    return status == 0
+
+
+def play_music(file_name):
+    # TODO: Dynamically change volume when playing alert
+    # os.system('')
+    os.system('aplay %s', file_name)
+    # os.system()
+
+
 if __name__ == '__main__':
 
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
@@ -65,6 +77,8 @@ if __name__ == '__main__':
             time.sleep(TIME_BETWEEN_QUICK_BREAKS)
             total_time += TIME_BETWEEN_QUICK_BREAKS
             time_since_rest_break += TIME_BETWEEN_QUICK_BREAKS
-            os.system('aplay /usr/share/sounds/purple/send.wav')
+            if headphones_on():
+                os.system('aplay /usr/share/sounds/purple/send.wav')
             trigger_break('Quick', DURATION_OF_QUICK_BREAK, PATH_TO_ICON)
-            os.system('aplay /usr/share/sounds/purple/login.wav')
+            if headphones_on():
+                os.system('aplay /usr/share/sounds/purple/login.wav')
