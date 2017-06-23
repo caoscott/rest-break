@@ -57,10 +57,14 @@ if __name__ == '__main__':
             time.sleep(time_til_rest_break)
             total_time += time_til_rest_break
             time_since_rest_break = 0
+            os.system('aplay /usr/share/sounds/speech-dispatcher/test.wav')
             trigger_break('Rest', DURATION_OF_REST_BREAK, PATH_TO_ICON)
+            os.system('aplay /usr/share/sounds/purple/login.wav')
         else:
             # Sleep until quick break
             time.sleep(TIME_BETWEEN_QUICK_BREAKS)
             total_time += TIME_BETWEEN_QUICK_BREAKS
             time_since_rest_break += TIME_BETWEEN_QUICK_BREAKS
+            os.system('aplay /usr/share/sounds/purple/send.wav')
             trigger_break('Quick', DURATION_OF_QUICK_BREAK, PATH_TO_ICON)
+            os.system('aplay /usr/share/sounds/purple/login.wav')
