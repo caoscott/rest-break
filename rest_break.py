@@ -43,7 +43,7 @@ if __name__ == '__main__':
     TIME_BETWEEN_QUICK_BREAKS = 300
     DURATION_OF_QUICK_BREAK = 30
     TIME_BETWEEN_REST_BREAKS = 1800
-    DURATION_OF_REST_BREAK = 600
+    DURATION_OF_REST_BREAK = 1200
     PATH_TO_ICON = '~/rest-break/icon.png'
 
     # Keeps track of how many seconds have passed since the last rest break 
@@ -69,16 +69,16 @@ if __name__ == '__main__':
             time.sleep(time_til_rest_break)
             total_time += time_til_rest_break
             time_since_rest_break = 0
-            os.system('aplay /usr/share/sounds/speech-dispatcher/test.wav')
+            os.system('aplay /usr/share/sounds/speech-dispatcher/test.wav &> /dev/null')
             trigger_break('Rest', DURATION_OF_REST_BREAK, PATH_TO_ICON)
-            os.system('aplay /usr/share/sounds/purple/login.wav')
+            os.system('aplay /usr/share/sounds/purple/login.wav &> /dev/null')
         else:
             # Sleep until quick break
             time.sleep(TIME_BETWEEN_QUICK_BREAKS)
             total_time += TIME_BETWEEN_QUICK_BREAKS
             time_since_rest_break += TIME_BETWEEN_QUICK_BREAKS
-            if headphones_on():
-                os.system('aplay /usr/share/sounds/purple/send.wav')
+            # if headphones_on():
+            os.system('aplay /usr/share/sounds/purple/send.wav &> /dev/null')
             trigger_break('Quick', DURATION_OF_QUICK_BREAK, PATH_TO_ICON)
-            if headphones_on():
-                os.system('aplay /usr/share/sounds/purple/login.wav')
+            # if headphones_on():
+            os.system('aplay /usr/share/sounds/purple/login.wav &> /dev/null')
